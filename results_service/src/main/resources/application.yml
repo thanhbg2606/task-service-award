@@ -1,0 +1,24 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: result-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/soa_result?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
+    username: root
+    password:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        connection:
+          characterEncoding: UTF-8
+          CharSet: UTF-8
+          useUnicode: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

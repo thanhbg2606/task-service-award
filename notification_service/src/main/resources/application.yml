@@ -1,0 +1,20 @@
+server:
+  port: 9003
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: thanhbg2606@gmail.com
+    password: oawxoitfqfpkobfz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  application:
+    name: notification-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
