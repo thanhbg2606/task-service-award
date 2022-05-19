@@ -19,7 +19,17 @@
 	</script>
 </head>
 <body>
+<<<<<<< HEAD
 
+=======
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;" >
+    <div class=" row" >
+     <div class="col-12 text-center" style="margin-left: 350px;">
+    <!-- Navbar content --><h2>Nhóm 19 : Trao Giải Thưởng </h2>
+      </div>
+    </div>
+  </nav>
+>>>>>>> 41f47cf6c68fde8de331b9e8db820850583a07ed
 <div class="container">
   <h2>Mời Bạn Nhập Thông Tin</h2>
   <form>
@@ -43,6 +53,16 @@
     <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+<<<<<<< HEAD
+=======
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 140px;">
+      @2022 Nhóm 19
+  </div>
+  <!-- Copyright -->
+</footer>
+>>>>>>> 41f47cf6c68fde8de331b9e8db820850583a07ed
 <script>
     // Example POST method implementation:
     let data = {};
@@ -87,11 +107,17 @@
 
       postData('http://localhost:9000/submit', data)
         .then(data => {
+<<<<<<< HEAD
           if(data.data === "Thông tin không hợp lệ"){
             $.notify(data.data, "error");
           } else if(data.data === "Mã số không trúng thưởng"){
             $.notify(data.data, "error");
           } else{
+=======
+          if(data.data == "Chúc bạn may mắn"){
+            $.notify(data.data, "error");
+          }else{
+>>>>>>> 41f47cf6c68fde8de331b9e8db820850583a07ed
             $.notify(data.data, "success");
           }
           // alert(data.data);
@@ -104,4 +130,8 @@
 </script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 41f47cf6c68fde8de331b9e8db820850583a07ed

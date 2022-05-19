@@ -4,9 +4,9 @@ spring:
   application:
     name: customer-service
   datasource:
-    url: jdbc:mysql://localhost:3306/soa_customer?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
+    url: jdbc:mysql://localhost:3307/soa_customer?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
     username: root
-    password:
+    password: chung123
   jpa:
     properties:
       hibernate:
@@ -17,7 +17,7 @@ spring:
           useUnicode: true
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 eureka:
   client:
     serviceUrl:
