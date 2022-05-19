@@ -13,8 +13,8 @@ public class ValidateFormServiceImpl implements ValidateFormService {
     @Override
     public Boolean checkForm(ResultDetail form) {
         emailExample = new EmailExample();
-        boolean isvalidEmail = emailExample.validate(  form.getCustomer().getEmail());
-        if (isvalidEmail == true && !form.getCustomer().getName().equals("") && !form.getCustomer().getAddress().equals("") && !form.getResult().getCode().equals("")) {
+        boolean isValidEmail = emailExample.validate(form.getCustomer().getEmail());
+        if (isValidEmail && !form.getCustomer().getName().equals("") && !form.getCustomer().getAddress().equals("") && !form.getResult().getCode().equals("")) {
             return true;
         } else {
             return false;

@@ -29,15 +29,11 @@ public class CallAPI {
 
     private static final String notificatonBaseURL =
             "http://notification-service";
-//    public Result getResultByCode(String code) {
-//        logger.info("calling result API using RestTemplate");
-//
-//        Result result = restTemplate.getForObject(
-//                resultBaseURL + "/result/{code}",
-//                Result.class, code);
-//        return result;
-//    }
 
+    private static final String validateMicroserviceBaseURL =
+            "http://validate-microservice";
+
+    //Phải sửa -> Lấy cả code đã  có người chúng thưởng(status == 1)
     public Result getResultByCode(String code) {
         logger.info("calling result API using RestTemplate");
         ResponseObject result = null;
@@ -56,12 +52,6 @@ public class CallAPI {
         }
     }
 
-//    public Customer save(Customer customer) {
-//        logger.info("calling customer API using RestTemplate");
-//        Customer c = restTemplate.postForObject(customerBaseURL+ "/customer", customer, Customer.class);
-//        return c;
-//    }
-
     public Customer save(Customer customer) {
         logger.info("calling customer API using RestTemplate");
         ResponseObject c = restTemplate.postForObject(customerBaseURL+ "/customer", customer, ResponseObject.class);
@@ -71,7 +61,7 @@ public class CallAPI {
         return r;
     }
 
-    //Phai sua
+    //Phải sửa
     public Result changeStatus(Result result) {
         logger.info("calling result API using RestTemplate");
 
@@ -87,6 +77,15 @@ public class CallAPI {
         restTemplate.postForObject(
                 notificatonBaseURL + "/notification",
                 result, Result.class
+        );
+    }
+
+    public boolean validate(ResultDetail result) {
+        logger.info("call validate microservice API using RestTemplate");
+
+        return restTemplate.postForObject(
+                validateMicroserviceBaseURL + "/validate",
+                result, Boolean.class
         );
     }
 }

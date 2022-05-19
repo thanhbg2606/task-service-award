@@ -18,7 +18,6 @@ public class ValidateFormController {
 
     @PostMapping("")
     public Boolean check(@RequestBody ResultDetail validateForm) {
-
         return validateFormService.checkForm(validateForm);
     }
 }

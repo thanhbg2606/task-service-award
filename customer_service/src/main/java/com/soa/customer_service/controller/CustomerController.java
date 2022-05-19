@@ -19,23 +19,12 @@ public class CustomerController {
     @Autowired
     private ICustomerService customerService;
 
-
-//    @PostMapping("")
-//    public Customer createCustomer(@RequestBody Customer customer){
-//        return customerService.save(customer);
-//    }
-
     @PostMapping("")
     public ResponseEntity<ResponseObject> createCustomer(@RequestBody Customer customer){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Insert customer successfully", customerService.save(customer))
         );
     }
-
-//    @GetMapping("/{id}")
-//    public Customer getCustomer(@PathVariable("id") Long id){
-//        return customerService.getById(id);
-//    }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResponseObject> updateCustomer(@RequestBody Customer customer, @PathVariable("id") Long id){

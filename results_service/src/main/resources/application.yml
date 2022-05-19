@@ -17,7 +17,7 @@ spring:
           useUnicode: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
 eureka:
   client:
     serviceUrl:

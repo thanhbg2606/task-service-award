@@ -16,11 +16,6 @@ public class HomeController {
     @Autowired
     private IHomeService homeService;
 
-//    @PostMapping("/submit")
-//    public String submitForm(@RequestBody ResultDetail resultDetail) {
-//        return homeService.SubmitForm(resultDetail);
-//    }
-
     @PostMapping("/submit")
     public ResponseEntity<ResponseObject> submitForm(@RequestBody ResultDetail resultDetail) {
         return ResponseEntity.status(HttpStatus.OK).body(

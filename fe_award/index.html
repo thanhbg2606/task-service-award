@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
+
+	<script type="text/javascript">
+		function notify() {
+			$.notify("Access granted", "success");
+		}
+	</script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Mời Bạn Nhập Thông Tin</h2>
+  <form>
+    <div class="form-group">
+      <label for="name">Họ Và Tên:</label>
+      <input type="text" class="form-control" id="name" placeholder="Nhập Tên" name="name">
+    </div>
+    <div class="form-group">
+        <label for="address">Địa CHỉ:</label>
+        <input type="text" class="form-control" id="address" placeholder="Nhập Địa Chỉ" name="address">
+      </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Nhập Email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="code">Mã Trúng Thưởng :</label>
+        <input type="text" class="form-control" id="code" placeholder="Nhập Mã" name="code">
+      </div>
+
+    <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<script>
+    // Example POST method implementation:
+    let data = {};
+    function getData(){
+        let inputName = document.getElementById("name").value;
+        let inputAddress = document.getElementById("address").value;
+        let inputEmail = document.getElementById("email").value;
+        let inputCode = document.getElementById("code").value   ;
+        return data = {
+            "customer":{
+                "name": inputName,
+                "address": inputAddress,
+                "email": inputEmail
+            },
+            "result":{
+                "code": inputCode
+            }
+        }
+    }
+
+    let btnSubmit = document.getElementById("btnSubmit");
+    btnSubmit.addEventListener("click", function(){
+        data = getData();
+        console.log(JSON.stringify(data));
+        async function postData(url = '', data = {}) {
+          // Default options are marked with *
+          const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+          });
+          return response.json(); // parses JSON response into native JavaScript objects
+      }
+
+      postData('http://localhost:9000/submit', data)
+        .then(data => {
+          if(data.data === "Thông tin không hợp lệ"){
+            $.notify(data.data, "error");
+          } else if(data.data === "Mã số không trúng thưởng"){
+            $.notify(data.data, "error");
+          } else{
+            $.notify(data.data, "success");
+          }
+          // alert(data.data);
+          console.log(data.data); // JSON data parsed by `data.json()` call
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>

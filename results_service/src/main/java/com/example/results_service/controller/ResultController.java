@@ -17,11 +17,6 @@ public class ResultController {
     @Autowired
     private IResultService resultService;
 
-//    @PostMapping("")
-//    public Result createResult(@RequestBody Result result){
-//        result.setStatus(0);
-//        return resultService.save(result);
-//    }
 
     @PostMapping("")
     public ResponseEntity<ResponseObject> createResult(@RequestBody Result result){
@@ -31,13 +26,6 @@ public class ResultController {
         );
     }
 
-//    @PutMapping("/{id}")
-//    public Result updateResult(@RequestBody Result result, @PathVariable("id") Long id){
-//        result.setId(id);
-//        result.setStatus(1);
-//        return resultService.save(result);
-//    }
-
     @PutMapping("/{id}")
     public ResponseEntity<ResponseObject> updateResult(@RequestBody Result result, @PathVariable("id") Long id){
         result.setId(id);
@@ -46,12 +34,6 @@ public class ResultController {
                 new ResponseObject("OK", "Update result successfully", resultService.save(result))
         );
     }
-
-//    @GetMapping("/{code}")
-//    public Result getResult(@PathVariable(name = "code") String  code){
-//        return resultService.findByCode(code);
-//    }
-
     @GetMapping("/{code}")
     public ResponseEntity<ResponseObject> getResult(@PathVariable(name = "code") String  code){
         Optional<Result> foundResult = Optional.ofNullable(resultService.findByCode(code));
