@@ -3,6 +3,7 @@ package com.example.results_service.controller;
 import com.example.results_service.entity.ResponseObject;
 import com.example.results_service.entity.Result;
 import com.example.results_service.service.IResultService;
+import com.example.results_service.service.impl.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +20,25 @@ public class ResultController {
 
 
     @PostMapping("")
-    public ResponseEntity<ResponseObject> createResult(@RequestBody Result result){
+    public ResponseEntity<ResponseObject> createResult(@RequestBody Result result) {
         result.setStatus(0);
+        result.setCode(resultService.randomCode());
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Insert result successfully", resultService.save(result))
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseObject> updateResult(@RequestBody Result result, @PathVariable("id") Long id){
+    public ResponseEntity<ResponseObject> updateResult(@RequestBody Result result, @PathVariable("id") Long id) {
         result.setId(id);
         result.setStatus(1);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Update result successfully", resultService.save(result))
         );
     }
+
     @GetMapping("/{code}")
-    public ResponseEntity<ResponseObject> getResult(@PathVariable(name = "code") String  code){
+    public ResponseEntity<ResponseObject> getResult(@PathVariable(name = "code") String code) {
         Optional<Result> foundResult = Optional.ofNullable(resultService.findByCode(code));
         return foundResult.isPresent() ? ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Query result successfully", foundResult)

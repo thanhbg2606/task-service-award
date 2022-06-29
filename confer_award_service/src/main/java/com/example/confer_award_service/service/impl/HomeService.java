@@ -15,19 +15,26 @@ public class HomeService implements IHomeService {
 
     @Override
     public String SubmitForm(ResultDetail rd) {
-        if(!callAPI.validate(rd)){
+        if (!callAPI.validate(rd)) {
             return "Thông tin không hợp lệ";
         }
 
         Result result = callAPI.getResultByCode(rd.getResult().getCode());
-        if(result == null) return "Mã số không trúng thưởng";
+
+
+        if (result == null) return "Mã số không trúng thưởng";
 
         rd.getCustomer().setResultId(result.getId());
 
         Customer c = callAPI.save(rd.getCustomer());
 
-        callAPI.changeStatus(result);
-        callAPI.sendNotification(rd);
-        return "Chúc mừng khách hàng " + c.getName()+ " đã trúng thưởng "+ result.getCode();
+        Thread thread = new Thread(() -> {
+            callAPI.changeStatus(result);
+            callAPI.sendNotification(rd);
+        });
+
+        thread.start();
+
+        return "Chúc mừng khách hàng " + c.getName() + " đã trúng thưởng " + result.getCode();
     }
 }

@@ -8,4 +8,5 @@ public interface IResultService {
 
     Result changeStatus(Result result);
     void delete(long[] ids);
+    String randomCode();
 }
